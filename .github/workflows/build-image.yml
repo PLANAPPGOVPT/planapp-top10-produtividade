@@ -35,4 +35,5 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.event.inputs.image_tag }}
-          no-cache: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

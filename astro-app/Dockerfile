@@ -12,4 +12,8 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./
 ENV NODE_ENV=production
 EXPOSE 4321
+
+# Aceitar host para Node adapter ouvir em 0.0.0.0
+ENV HOST=0.0.0.0
+
 CMD ["node", "./dist/server/entry.mjs"]
