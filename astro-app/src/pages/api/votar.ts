@@ -1,7 +1,8 @@
 import type { APIRoute } from 'astro'
-import sql from '../../lib/db'
+import { getDb } from '../../lib/db'
 
 export const POST: APIRoute = async ({ request }) => {
+  const sql = getDb()
   const { sessao_id, medidas } = await request.json()
 
   if (!sessao_id || !Array.isArray(medidas) || medidas.length !== 10) {

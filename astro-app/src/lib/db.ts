@@ -1,13 +1,16 @@
 import postgres from 'postgres'
 
-const connectionString = import.meta.env.SUPPORT_SCHEMAS_URL
-if (!connectionString) {
-  throw new Error('Missing SUPPORT_SCHEMAS_URL environment variable')
+let _sql: ReturnType<typeof postgres> | null = null
+
+export function getDb() {
+  if (_sql) return _sql
+  const url = process.env.SUPPORT_SCHEMAS_URL || process.env.DATABASE_URL
+  if (!url) {
+    throw new Error('Missing SUPPORT_SCHEMAS_URL environment variable')
+  }
+  _sql = postgres(url, {
+    prepare: false,
+    ssl: { rejectUnauthorized: false },
+  })
+  return _sql
 }
-
-const sql = postgres(connectionString, {
-  prepare: false,
-  ssl: { rejectUnauthorized: false },
-})
-
-export default sql

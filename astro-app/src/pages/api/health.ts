@@ -1,8 +1,9 @@
 import type { APIRoute } from 'astro'
-import sql from '../../lib/db'
+import { getDb } from '../../lib/db'
 
 export const GET: APIRoute = async () => {
   try {
+    const sql = getDb()
     await sql`SELECT 1`
     return new Response(
       JSON.stringify({ status: 'ok', db: 'connected' }),

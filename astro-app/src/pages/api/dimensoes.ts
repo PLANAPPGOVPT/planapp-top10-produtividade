@@ -1,7 +1,8 @@
 import type { APIRoute } from 'astro'
-import sql from '../../lib/db'
+import { getDb } from '../../lib/db'
 
 export const GET: APIRoute = async () => {
+  const sql = getDb()
   const dimensoes = await sql`
     SELECT d.id, d.titulo,
       json_agg(
