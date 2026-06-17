@@ -22,7 +22,8 @@ jobs:
       - uses: actions/checkout@v4
       - id: version
         run: |
-          TAG="v$(date +%Y.%m.%d)-${{ github.run_number }}"
+          # Só para o flux image automation detetar (semver pattern vX.Y.Z)
+          TAG="v0.0.${{ github.run_number }}"
           echo "image_tag=$TAG" >> $GITHUB_OUTPUT
           echo "Image tag: $TAG"
 
