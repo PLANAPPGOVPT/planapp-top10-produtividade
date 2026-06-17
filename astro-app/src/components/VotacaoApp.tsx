@@ -8,7 +8,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { X, Check, Plus, ChevronDown } from "lucide-react"
+import { X, Check, HelpCircle } from "lucide-react"
 
 interface Medida {
   id: string
@@ -27,6 +27,7 @@ export default function VotacaoApp() {
   const [escolhas, setEscolhas] = useState<string[]>([])
   const [submetido, setSubmetido] = useState(false)
   const [carregando, setCarregando] = useState(true)
+  const [modalAberto, setModalAberto] = useState(true)
 
   useEffect(() => {
     fetch("/api/dimensoes")
@@ -81,10 +82,10 @@ export default function VotacaoApp() {
   )
 
   return (
-    <div className="flex h-[calc(100vh-4rem)] gap-4 overflow-hidden">
-      {/* Painel lateral — escolhas */}
-      <aside className="bg-muted flex w-80 shrink-0 flex-col rounded-xl border">
-        <div className="border-b bg-white p-4">
+    <div className="flex h-full gap-4">
+      {/* Painel lateral — escolhas (fixed, não rola) */}
+      <aside className="bg-muted flex h-full w-80 shrink-0 flex-col overflow-hidden rounded-xl border">
+        <div className="border-b bg-white p-4 shrink-0">
           <h2 className="font-semibold">As suas 10 escolhas</h2>
           <div className="mt-1 flex items-center gap-2">
             <div className="h-2 flex-1 overflow-hidden rounded-full bg-gray-200">
@@ -101,7 +102,7 @@ export default function VotacaoApp() {
         <ScrollArea className="flex-1 px-2 py-2">
           {escolhas.length === 0 && (
             <p className="text-muted-foreground p-4 text-center text-sm leading-relaxed">
-              Explore as dimensões ao lado e escolha até 10 medidas que considera mais importantes para Portugal.
+              Explore as dimensões ao lado e Escolha 10 medidas que considera mais importantes para Portugal.
             </p>
           )}
           {escolhas.map((id, i) => {
@@ -115,14 +116,9 @@ export default function VotacaoApp() {
                   {i + 1}
                 </span>
                 <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-1.5">
-                    <Badge variant="secondary" className="text-[10px]">
-                      {m.id}
-                    </Badge>
-                    <p className="text-muted-foreground text-xs leading-tight">
-                      {m.dimensao_titulo}
-                    </p>
-                  </div>
+                  <p className="text-muted-foreground text-xs leading-tight">
+                    {m.dimensao_titulo}
+                  </p>
                   <p className="mt-0.5 text-sm leading-snug font-medium">
                     {m.titulo}
                   </p>
@@ -140,7 +136,7 @@ export default function VotacaoApp() {
             )
           })}
         </ScrollArea>
-        <div className="border-t bg-white p-3">
+        <div className="border-t bg-white p-3 shrink-0">
           <Button
             className="w-full"
             disabled={escolhas.length !== 10}
@@ -155,14 +151,28 @@ export default function VotacaoApp() {
 
       {/* Área central — dimensões */}
       <main className="flex-1 overflow-hidden rounded-xl border bg-white">
-        <div className="border-b bg-gray-50 p-4">
-          <h1 className="text-lg font-semibold">
-            Escolha as 10 Medidas para a Produtividade
-          </h1>
-          <p className="text-muted-foreground text-sm">
-            Clique nas dimensões para explorar as medidas propostas.
-          </p>
-        </div>
+        <div className="border-b bg-gray-50 px-4 py-3 flex items-center justify-between">
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <img src="/logo_navbar.png" alt="Planapp" className="h-6 w-auto" />
+                <h1 className="text-lg font-semibold">
+                  Escolha as 10 Medidas para a Produtividade
+                </h1>
+              </div>
+              <p className="text-muted-foreground text-sm">
+                Clique nas dimensões para explorar as medidas propostas.
+              </p>
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              className="gap-1.5 shrink-0"
+              onClick={() => setModalAberto(true)}
+            >
+              <HelpCircle className="size-4" />
+              Como funciona
+            </Button>
+          </div>
         <ScrollArea className="h-[calc(100%-4.5rem)] px-4 py-4">
           <Accordion type="multiple" className="space-y-2">
             {dimensoes.map((d) => {
@@ -197,49 +207,37 @@ export default function VotacaoApp() {
                       return (
                         <div
                           key={m.id}
-                          className={`rounded-lg border bg-white p-4 shadow-sm transition-all ${
+                          role="button"
+                          tabIndex={0}
+                          className={`cursor-pointer rounded-lg border bg-white p-4 shadow-sm transition-all ${
                             selecionada
                               ? "border-green-300 ring-1 ring-green-200"
                               : "hover:shadow-md"
+                          } ${
+                            !selecionada && escolhas.length >= 10
+                              ? "pointer-events-none opacity-50"
+                              : ""
                           }`}
+                          onClick={() => toggleMedida(m.id)}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                              e.preventDefault()
+                              toggleMedida(m.id)
+                            }
+                          }}
                         >
                           <div className="flex items-start justify-between gap-3">
                             <div className="min-w-0 flex-1">
-                              <div className="flex items-center gap-2">
-                                <Badge
-                                  variant="outline"
-                                  className="text-[10px] font-mono shrink-0"
-                                >
-                                  {m.id}
-                                </Badge>
-                                <h4 className="text-sm font-semibold leading-snug">
-                                  {m.titulo}
-                                </h4>
-                              </div>
+                              <h4 className="text-sm font-semibold leading-snug">
+                                {m.titulo}
+                              </h4>
                               <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
                                 {m.descricao}
                               </p>
                             </div>
-                            <Button
-                              size="sm"
-                              variant={selecionada ? "default" : "outline"}
-                              className="shrink-0 transition-all"
-                              disabled={
-                                !selecionada && escolhas.length >= 10
-                              }
-                              onClick={() => toggleMedida(m.id)}
-                            >
-                              {selecionada ? (
-                                <>
-                                  <Check className="mr-1 size-3.5" />{" "}
-                                  Escolhida
-                                </>
-                              ) : (
-                                <>
-                                  <Plus className="mr-1 size-3.5" /> Escolher
-                                </>
-                              )}
-                            </Button>
+                            {selecionada && (
+                              <Check className="size-5 shrink-0 text-green-600" />
+                            )}
                           </div>
                         </div>
                       )
@@ -251,6 +249,94 @@ export default function VotacaoApp() {
           </Accordion>
         </ScrollArea>
       </main>
-    </div>
+
+        {/* Modal "Como funciona" */}
+        {modalAberto && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4"
+            onClick={() => setModalAberto(false)}
+          >
+            <div
+              className="relative w-full max-w-lg rounded-xl border bg-white p-6 shadow-2xl max-h-[90vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute top-3 right-3"
+                onClick={() => setModalAberto(false)}
+                aria-label="Fechar"
+              >
+                <X className="size-4" />
+              </Button>
+
+              <div className="flex items-center gap-2 mb-5">
+                <span className="text-2xl">👋</span>
+                <h2 className="text-lg font-semibold">Bem-vindo(a)!</h2>
+              </div>
+
+              <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                Estão em consulta <strong className="text-foreground">32 medidas</strong> de
+                política pública para aumentar a produtividade em Portugal,
+                distribuídas por <strong className="text-foreground">9 dimensões</strong> de
+                intervenção. O seu papel é escolher as{" "}
+                <strong className="text-foreground">10 mais importantes</strong>.
+              </p>
+
+              <div className="mb-4 rounded-lg bg-blue-50 border border-blue-200 p-3 text-sm">
+                <p className="text-blue-800">
+                  O resultado agregado de todas as votações será apresentado ao Governo como um conjunto de <strong>10 recomendações prioritárias</strong> de políticas pró-produtividade.
+                </p>
+              </div>
+
+              <div className="space-y-3 text-sm">
+                <h3 className="font-semibold text-foreground">Como participar:</h3>
+
+                <div className="flex gap-3 rounded-lg border bg-gray-50 p-3">
+                  <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">1</span>
+                  <div>
+                    <p className="font-medium text-foreground">Explore as dimensões</p>
+                    <p className="text-muted-foreground text-xs mt-0.5">
+                      Clique nos cabeçalhos das dimensões para expandir e ver as medidas disponíveis em cada uma.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-3 rounded-lg border bg-gray-50 p-3">
+                  <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">2</span>
+                  <div>
+                    <p className="font-medium text-foreground">Selecione as medidas</p>
+                    <p className="text-muted-foreground text-xs mt-0.5">
+                      Toque/clique num cartão de medida para a selecionar. A medida aparece automaticamente no painel lateral esquerdo. Toque novamente para remover.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-3 rounded-lg border bg-gray-50 p-3">
+                  <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">3</span>
+                  <div>
+                    <p className="font-medium text-foreground">Submeta a votação</p>
+                    <p className="text-muted-foreground text-xs mt-0.5">
+                      Quando tiver as 10 escolhas, o botão <strong>Submeter votação</strong> fica ativo no fundo do painel lateral. Reveja as suas escolhas e submeta.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-5 rounded-lg bg-green-50 border border-green-200 p-3 text-sm">
+                <p className="text-green-800">
+                  <strong>💡 Dica:</strong> Pode remover e trocar medidas à vontade antes de submeter. A ordem das medidas não influencia o resultado — só conta a votação final com as 10 escolhidas.
+                </p>
+              </div>
+
+              <div className="mt-5 flex justify-end">
+                <Button onClick={() => setModalAberto(false)}>
+                  Começar
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
   )
 }

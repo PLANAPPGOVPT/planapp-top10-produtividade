@@ -4,19 +4,7 @@ import VotacaoApp from "@/components/VotacaoApp"
 ---
 
 <Layout>
-  <div class="flex min-h-svh flex-col bg-gray-100">
-    <header class="border-b bg-white px-6 py-3">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <img src="/logo_navbar.png" alt="Planapp" class="h-8 w-auto" />
-          <div class="h-6 w-px bg-gray-200" aria-hidden="true" />
-          <h1 class="text-base font-semibold">Top 10 — Medidas para a Produtividade</h1>
-        </div>
-        <span class="text-muted-foreground text-xs">Escolha até 10 medidas</span>
-      </div>
-    </header>
-    <main class="flex-1 p-4">
-      <VotacaoApp client:load />
-    </main>
+  <div class="bg-gray-100 h-svh p-4">
+    <VotacaoApp client:load />
   </div>
 </Layout>
