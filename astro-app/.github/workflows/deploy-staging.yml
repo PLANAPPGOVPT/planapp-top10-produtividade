@@ -13,30 +13,38 @@ env:
 
 jobs:
   deploy:
-    runs-on: [self-hosted, Linux, ARM64]
+    runs-on: ubuntu-latest
     environment: staging
     steps:
       - uses: actions/checkout@v4
 
-      - name: Copy docker-compose to runner
+      - name: Setup SSH
         run: |
-          mkdir -p /opt/produtividade-staging
-          cp docker-compose.staging.yml /opt/produtividade-staging/
-          cp vm/nginx/staging.conf /opt/produtividade-staging/
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY_PLANAPP }}" > ~/.ssh/id_rsa_planapp
+          chmod 600 ~/.ssh/id_rsa_planapp
+          ssh-keyscan -H 20.82.4.235 >> ~/.ssh/known_hosts
+          ssh-keyscan -H 100.107.116.90 >> ~/.ssh/known_hosts
 
-      - name: Deploy
-        working-directory: /opt/produtividade-staging
+      - name: Copy files to VM
         run: |
-          echo "IMAGE_TAG=${{ github.event.inputs.image_tag }}" > .env
-          echo "SUPPORT_SCHEMAS_URL=${{ secrets.SUPPORT_SCHEMAS_URL }}" >> .env
-          docker compose -f docker-compose.staging.yml pull
-          docker compose -f docker-compose.staging.yml up -d --remove-orphans
+          ssh -i ~/.ssh/id_rsa_planapp hugo@20.82.4.235 "mkdir -p /opt/produtividade-staging"
+          scp -i ~/.ssh/id_rsa_planapp docker-compose.staging.yml vm/nginx/staging.conf hugo@20.82.4.235:/opt/produtividade-staging/
 
-      - name: Install nginx config
+      - name: Deploy on VM
         run: |
-          sudo cp /opt/produtividade-staging/staging.conf /etc/nginx/sites-available/produtividade-staging.planapp.gov.pt.conf
-          sudo ln -sf /etc/nginx/sites-available/produtividade-staging.planapp.gov.pt.conf /etc/nginx/sites-enabled/
-          sudo nginx -t && sudo systemctl reload nginx
+          ssh -i ~/.ssh/id_rsa_planapp hugo@20.82.4.235 << 'EOF'
+            set -e
+            cd /opt/produtividade-staging
+            echo "IMAGE_TAG=${{ github.event.inputs.image_tag }}" > .env
+            echo "SUPPORT_SCHEMAS_URL=${{ secrets.SUPPORT_SCHEMAS_URL }}" >> .env
+            echo "PORT=4321" >> .env
+            docker compose -f docker-compose.staging.yml pull
+            docker compose -f docker-compose.staging.yml up -d --remove-orphans
+            sudo cp staging.conf /etc/nginx/sites-available/produtividade-staging.planapp.gov.pt.conf
+            sudo ln -sf /etc/nginx/sites-available/produtividade-staging.planapp.gov.pt.conf /etc/nginx/sites-enabled/
+            sudo nginx -t && sudo systemctl reload nginx
+          EOF
 
       - name: Healthcheck
         run: |
