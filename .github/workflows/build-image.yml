@@ -9,7 +9,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: planapp-gov-pt/planapp-top10-produtividade
+  IMAGE_NAME: planappgovpt/planapp-top10-produtividade
 
 jobs:
   build:
