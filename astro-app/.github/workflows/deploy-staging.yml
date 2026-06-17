@@ -13,18 +13,25 @@ jobs:
     environment: staging
     steps:
       - uses: actions/checkout@v4
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY_PLANAPP }}" > ~/.ssh/id_rsa_planapp
+          chmod 600 ~/.ssh/id_rsa_planapp
+          ssh-keyscan -H 20.82.4.235 >> ~/.ssh/known_hosts
+          ssh-keyscan -H 100.107.116.90 >> ~/.ssh/known_hosts
       - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.STAGING_HOST }}
-          username: ${{ secrets.STAGING_USER }}
-          key: ${{ secrets.STAGING_SSH_KEY }}
-          script: |
-            cd /opt/produtividade-staging
+        run: |
+          ssh -i ~/.ssh/id_rsa_planapp hugo@20.82.4.235 << 'EOF'
+            set -e
+            cd /opt/produtividade-staging || mkdir -p /opt/produtividade-staging && cd /opt/produtividade-staging
             echo "IMAGE_TAG=${{ github.event.inputs.image_tag }}" > .env
             echo "SUPPORT_SCHEMAS_URL=${{ secrets.SUPPORT_SCHEMAS_URL }}" >> .env
             docker compose -f docker-compose.staging.yml pull
-            docker compose -f docker-compose.staging.yml up -d
-            sudo cp vm/nginx/staging.conf /etc/nginx/sites-available/produtividade-staging.planapp.gov.pt.conf
-            sudo ln -sf /etc/nginx/sites-available/produtividade-staging.planapp.gov.pt.conf /etc/nginx/sites-enabled/
+            docker compose -f docker-compose.staging.yml up -d --remove-orphans
             sudo nginx -t && sudo systemctl reload nginx
+          EOF
+      - name: Healthcheck
+        run: |
+          sleep 10
+          curl -sf https://produtividade-staging.planapp.gov.pt/api/health || exit 1
