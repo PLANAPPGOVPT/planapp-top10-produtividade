@@ -1,0 +1,216 @@
+[
+  {
+    "id": "D1",
+    "titulo": "Governança da Produtividade",
+    "medidas": [
+      {
+        "id": "D1.1",
+        "titulo": "Liderança Política da Produtividade",
+        "descricao": "Designar e mandatar um responsável de alto nível (ministro) responsável no Governo por coordenar, acompanhar e promover publicamente a agenda de políticas para a produtividade, bem como os correspondentes progressos alcançados, assegurando ainda a articulação entre Governo e outras entidades relevantes no contexto da governança da produtividade."
+      },
+      {
+        "id": "D1.2",
+        "titulo": "Conselho Superior para a Produtividade",
+        "descricao": "Estabelecer um Conselho Superior para a Produtividade (CSP), com independência e devidamente mandatado para monitorizar e analisar a evolução da produtividade em Portugal, apresentando periodicamente recomendações e elaborando anualmente um Relatório da Produtividade, com autonomia mas fazendo as necessárias articulações com o Governo, Parceiros Sociais (mormente através do Conselho Económico e Social) e demais partes interessadas relevantes. O CSP deve ainda promover a literacia e debate do tema da produtividade a nível nacional, mantendo partilhas de experiências com entidades congéneres internacionais, além de incorporar, no seu âmbito, um Provedor para a Produtividade, vocacionado para analisar estrangulamentos da produtividade apresentados por cidadãos e/ou pessoas coletivas. No seio do CSP podem ser enquadradas igualmente equipas ou grupos de trabalho vocacionados para análises de promoção da produtividade em sectores de atividade específicos, mobilizando para esse efeito associações empresariais, instituições de ensino superior, especialistas e outras personalidades ou entidades relevantes."
+      },
+      {
+        "id": "D1.3",
+        "titulo": "Abordagens Territoriais",
+        "descricao": "Em colaboração com CCDR, Entidades Intermunicipais (CIM e Áreas Metropolitanas) e ANMP, estimular a definição e implementação de agendas territoriais de reforço da produtividade, direcionadas  para a obtenção de resultados relevantes, ajustados a cada realidade territorial em concreto, podendo incluir ainda experiências piloto, que, quando bem sucedidas, podem depois escalar para vir a ter um âmbito nacional. Complementarmente, reabrir e atualizar as estratégias de especialização inteligente nacionais e regionais (RIS3), com processo alargado de escuta e validação para selecionar prioridades setoriais/territoriais que possam contribuir para reforçar a produtividade."
+      },
+      {
+        "id": "D1.4",
+        "titulo": "Agenda para a Produtividade",
+        "descricao": "Criação e divulgação de Agenda para a Produtividade, a ser alvo de elaboração e revisão periódica, com identificação de metas a alcançar e sugestão de medidas a implementar, devidamente calendarizadas, alvo de atualização no final de cada ciclo de cinco anos de vigência da mesma. Esta agenda deve incluir os correspondentes sistemas e mecanismo de monitorização e avaliação do progresso registado. Complementarmente, dela devem constar conteúdos adequados para a sensibilização e formação de todos os interessados em torno dos conceitos, métricas (e.g., acréscimo percentual do número de empresas que são exportadoras regulares, acréscimo percentual do número de empresas que ultrapassam um determinado patamar de faturação, incremento do volume e valor médio de exportações e do VAB por hora trabalhada), abordagens e boas práticas relacionadas com a promoção da produtividade a nível nacional e internacional."
+      }
+    ]
+  },
+  {
+    "id": "D2",
+    "titulo": "Crescimento e Internacionalização das Empresas",
+    "medidas": [
+      {
+        "id": "D2.1",
+        "titulo": "Fiscalidade Amiga do Crescimento das Organizações",
+        "descricao": "Eliminar a derrama estadual, remover a progressividade do IRC e estender regimes de dedução fiscal por lucros retidos e reinvestidos que hoje beneficiam apenas microempresas para incluir todas as empresas, de modo a eliminar penalizações fiscais ao crescimento empresarial e incentivar a acumulação de capital por trabalhador. Adicionalmente, construir sistema de significativos incentivos fiscais, com redução do IRC que incide sobre empresas, de qualquer dimensão, que apresentem sustentadamente ritmos de elevado crescimento (e.g. aumentos anuais de volume de vendas, salários ou exportações superiores a 10% ao longo dos últimos três anos). Promover igualmente alterações da legislação fiscal que tornem mais benéfico o quadro de amortização fiscal do valor de goodwill pago em aquisições de empresas, de modo a não penalizar fiscalmente operações de fusão e aquisição e estimular o crescimento das empresas por esta via."
+      },
+      {
+        "id": "D2.2",
+        "titulo": "Mentoria do Crescimento de Empresas",
+        "descricao": "Criar um programa específico de aceleração e transformação numa lógica de mentoria, destinado a PME que queiram crescer para uma outra dimensão, contratualizando as correspondentes metas de evolução num horizonte temporal de cinco anos. As PME cujas candidaturas forem selecionadas poderão beneficiar de mentoria assegurada por gestores de grandes empresas e entidades do sistema científico e tecnológico, podendo assim escolher o apoio mais apropriado para o seu crescimento, sendo os correspondentes incentivos públicos disponibilizados contra a apresentação dos resultados contratualizados de crescimento."
+      },
+      {
+        "id": "D2.3",
+        "titulo": "Agência de Apoio ao Crescimento Empresarial",
+        "descricao": "Conjugando recursos existentes no IAPMEI e na AICEP, criar uma Agência de Apoio ao Crescimento Empresarial (dotada deste foco, mas que pode não carecer de uma nova personalidade jurídica própria), exclusivamente vocacionada para apoiar PME com vontade e potencial de crescimento e de internacionalização, com metas assumidas de ganhos de escala a alcançar ao longo de cada cinco anos, estabelecendo-se enquanto espaço integrado e balcão único de apoio a estas PME. Esta agência deve ser dotada de gestores de cliente para as candidaturas aprovadas e ser capacitada para proporcionar todo o tipo de serviços de apoio relevantes (por si mesma ou através de um conjunto de parceiros), tais como os que se relacionam com missões internacionais, oportunidades de mercado, presença em eventos, contratação, networking e identificação de colaborações possíveis, mentoring internacional, branding e marketing, financiamento, soluções de transporte e logística, produção e consumo de energia (incluindo PPAs - Power Purchase Agreements), transformação digital e IA."
+      }
+    ]
+  },
+  {
+    "id": "D3",
+    "titulo": "Pessoas",
+    "medidas": [
+      {
+        "id": "D3.1",
+        "titulo": "Mapeamento de Necessidades do Mercado de Trabalho",
+        "descricao": "Produzir um roteiro de mapeamento, atualizável como elevada frequência, das necessidades de competências e qualificações por parte das empresas, com identificação de eventuais gaps relativamente à oferta existente, para orientar iniciativas de formação e políticas de empregabilidade. Este instrumento deve ficar à disposição de todas as entidades que o pretendam utilizar, incluindo ANQEP- Agência Nacional para a Qualificação e o Ensino Profissional e IEFP- Instituto do Emprego e da Formação Profissional. Criar, neste contexto, processos regionais e territoriais sistemáticos de alinhamento entre oferta formativa e necessidades do mercado de trabalho, com o envolvimento ativo de entidades coletivas relevantes (e.g., associações empresariais regionais, Clusters setoriais reconhecidos) para adaptar formação atual e futura às exigências locais/regionais e promover programas contínuos de formação prática, tanto na vertente de ensino profissional como de formação profissional."
+      },
+      {
+        "id": "D3.2",
+        "titulo": "Formação ao Longo da Vida e de Gestores",
+        "descricao": "Dinamização de ambicioso programa de formação para adultos, de natureza aplicada, com foco nos conceitos, métricas e metodologias de apoio ao reforço da produtividade, acompanhado de um sistema de monitorização da correspondente eficácia formativa, traduzida por ganhos reais de produtividade alcançados nas organizações no seguimento da referida formação. Incluem-se aqui, como caso particular, programas de formação específicos direcionados para empresários e responsáveis máximos de PME (liderança, gestão da mudança, estruturação de problemas, análises segmentadas de rentabilidade por produto/serviço/processo, literacia para a produtividade, abordagens orientadas de medição e melhoria da produtividade)."
+      },
+      {
+        "id": "D3.4",
+        "titulo": "Mentoria para a Produtividade",
+        "descricao": "Implementar programas/pilotos que emparelhem gestores com experiência acumulada em empresas produtivas e responsáveis máximos de PME, com mecanismos de mentoria associados ao longo de um período temporal limitado e avaliação dos ganhos de produtividade alcançados. Complementarmente, implementar programa através do qual jovens altamente qualificados possam interagir com empresários e gestores de PME, para transferência prática de competências, com avaliação dos resultados alcançados em termos de ganhos de produtividade."
+      }
+    ]
+  },
+  {
+    "id": "D4",
+    "titulo": "Concorrência",
+    "medidas": [
+      {
+        "id": "D4.1",
+        "titulo": "Alargamento do Âmbito de Intervenção da Autoridade da Concorrência",
+        "descricao": "Alargar a incidência das atividades da Autoridade da Concorrência para investigar de forma eficaz e sancionar os casos de exercício abusivo de poder de mercado em áreas de atividade económica aparentemente menos acompanhadas (e.g., comércio a retalho, restauração, construção civil), assegurando a existência de concorrência leal e saudável de forma transversal em todas as atividades económicas."
+      },
+      {
+        "id": "D4.2",
+        "titulo": "Dinamização do Acesso a Mercado Europeu",
+        "descricao": "Alterar práticas e regras no âmbito da política da concorrência para privilegiar definições de mercado relevante a nível europeu, quando apropriado (designadamente no contexto do Mercado Único dos Serviços), permitindo que as  empresas nacionais ganhem escala europeia e concorram a nível internacional."
+      }
+    ]
+  },
+  {
+    "id": "D5",
+    "titulo": "Reforma do Estado, Qualidade e Produtividade das Instituições",
+    "medidas": [
+      {
+        "id": "D5.1",
+        "titulo": "Reforma de Procedimentos Fiscais",
+        "descricao": "Implementar reforma de procedimentos na administração fiscal (e.g., presunção de inocência, limites a práticas de cobrança/auditoria agressiva, maior transparência nos processos de fiscalização)  e eliminação do regime legal especial que confere tratamento diferenciador à Autoridade Tributária e Aduaneira em matéria de litigância de má-fé, sujeitando-a ao regime geral, para reduzir insegurança jurídica e custos administrativos das empresas."
+      },
+      {
+        "id": "D5.2",
+        "titulo": "Reforma de Procedimentos de Registo e Licenciamento",
+        "descricao": "Rever os procedimentos de registo de atividades económicas e o regime de licenciamentos (e.g., graduação das exigências por dimensão e características objetivas dos projetos; eliminação de duplicações e exigências contraditórias; instituição da declaração única para processos de licenciamento e balcão único digital para gerir todas as aprovações e não-oposições administrativas, evitando que empresas tenham de contactar dezenas de organismos distintos; regime de 'licenciamento na hora', para processos de aprovação administrativo imediatos). Modernizar e assegurar a interoperabilidade das plataformas informáticas, garantindo também atendimento especializado (telefónico, presencial ou suportado por IA). Complementarmente, instituir uma via verde para concessão prioritária de licenciamentos em áreas críticas e assegurar que pedidos concorrentes ou de alteração são apreciados simultaneamente, promovendo o uso alargado da conferência procedimental e reforçando a coordenação interinstitucional."
+      },
+      {
+        "id": "D5.5",
+        "titulo": "Rotações Temporárias de Pessoas entre Entidades Públicas e Privadas",
+        "descricao": "Construir e implementar programa de intercâmbios entre quadros da administração pública e empresas/associações setoriais/entidades sem fins lucrativos, facultando que, durante um determinado período, técnicos da administração pública trabalhem em entidades privadas e vice‑versa, patrocinando uma melhoria do alinhamento das políticas públicas com a realidade vivida pelas entidades privadas, bem como um melhor entendimento por parte destas relativamente ao funcionamento da administração pública, potenciando ainda sugestões de melhoria em ambos os sentidos, com vantagens mútuas."
+      },
+      {
+        "id": "D5.6",
+        "titulo": "Simplificação de Processos de Insolvência e Remoção de Empresas Inviáveis",
+        "descricao": "Rever e simplificar de modo significativo os processos de insolvência e os processos de revitalização de empresas (PER), com redução das barreiras legais e administrativas à saída de empresas do mercado, ao mesmo tempo que se evita dar artificialmente continuidade a empresas inviáveis (e.g., empresas  “zombie” ou catatónicas). Complementarmente, reformar o regime dos administradores judiciais e dos correspondentes instrumentos processuais, para eliminar incentivos que tendem a prolongar estes processos, reduzindo, assim, a sua duração média."
+      },
+      {
+        "id": "D5.11",
+        "titulo": "Redução dos tempos de resposta da Justiça",
+        "descricao": "Rever as regras das carreiras da magistratura e dos oficiais de justiça para introduzir incentivos de produtividade, designadamente vinculando a progressão e/ou prémios remuneratórios dos magistrados e oficiais de justiça a indicadores concretos e mensuráveis de produtividade/eficiência, incluindo os tempos de resposta associados a diferentes tipos de processos, que devem ser confrontados com as boas práticas internacionais existentes."
+      },
+      {
+        "id": "D5.12",
+        "titulo": "Prémios de Produtividade, Qualidade e Desempenho na Administração Pública",
+        "descricao": "Implementar de forma alargada na administração pública sistemas eficazes, eficientes e simples de monitorização da produtividade, qualidade e desempenho alcançados, assim como das correspondentes melhorias. Implementar também sistemas de prémios organizacionais associados aos resultados alcançados em termos de ganhos de produtividade, com as devidas repercussões junto dos respetivos trabalhadores."
+      }
+    ]
+  },
+  {
+    "id": "D6",
+    "titulo": "Financiamento",
+    "medidas": [
+      {
+        "id": "D6.1",
+        "titulo": "Critérios de elegibilidade, avaliação e pagamento em sistemas de incentivos",
+        "descricao": "Alterar os critérios de elegibilidade e de avaliação de projetos e candidaturas no âmbito dos diferentes tipos de sistemas de incentivos (e.g., fundos estruturais europeus), por forma a que os projetos sejam avaliados e seriados de acordo com o seu contributo para reforçar a produtividade, designadamente medida pelo valor acrescentado por hora trabalhada, e o aumento da massa salarial com recursos humanos qualificados (com o estabelecimento de referenciais setoriais, se pertinente). Assegurar que uma parte significativa dos apoios públicos é disponibilizada contra a apresentação de resultados, além de se garantir igualmente que candidaturas subsequentes a sistemas de incentivos são explicitamente avaliadas tendo em conta também os resultados obtidos em candidaturas anteriores no que se refere a ganhos de produtividade alcançados."
+      },
+      {
+        "id": "D6.2",
+        "titulo": "Financiamento do Crescimento das Organizações",
+        "descricao": "Desenvolver veículos públicos/semipúblicos de capital paciente e de partilha/mitigação de risco (e.g., garantias, linhas de crédito, instrumentos de dívida, fundos de longo prazo), vocacionados para financiar empresas em fase de ganho de escala  (passagem para outro patamar de dimensão, devidamente calendarizado) e que reduzam o risco percebido pelos empresários que empreendem estratégias de crescimento acelerado (estes veículos devem prever mecanismos que permitam fazer uma avaliação adequada dos correspondentes planos de negócios e que reconheçam ativos imateriais, relacionados por exemplo com branding e posicionamento no mercado, reduzindo a dependência de colaterais tangíveis). Estes instrumentos deverão também contribuir para criar condições que estimulem empresas de alto potencial de crescimento a manter as suas sedes e a maior parte do capital em Portugal. Os apoios devem ser condicionados à apresentação e concretização de metas associadas a ganhos de produtividade."
+      },
+      {
+        "id": "D6.4",
+        "titulo": "Linhas de Financiamento para Transições Organizacionais",
+        "descricao": "Desenhar linhas de financiamento ou fundos específicos para apoio à sucessão empresarial e a processos relacionados com agregação ou crescimento de PME tradicionais, incluindo consultoria para apoio à transição geracional e reestruturação organizacional. Tais apoios devem ficar condicionados à obtenção de resultados associados a ganhos de produtividade alcançados."
+      },
+      {
+        "id": "D6.6",
+        "titulo": "Reforço e Diversificação de Tipologias de Financiamento",
+        "descricao": "Promover medidas de aprofundamento do mercado de capitais nacional, designadamente através de incentivos regulamentares e fiscais à cotação de empresas e ao recurso a instrumentos de private equity (como complemento dos instrumentos já implementados pelo Banco de Fomento), de modo a reduzir dependências do crédito bancário e facilitar o crescimento empresarial assente em capital próprio, gerador de ganhos de produtividade. Complementarmente, adaptar o  quadro regulamentar da banca comercial de modo a que estas entidades possam agilmente transferir controlo de empresas em situação de incumprimento para fundos de private equity que promovam reestruturação empresarial e profissionalização da gestão nesta tipologia de empresas, com correspondentes metas de evolução e ganho de produtividade."
+      }
+    ]
+  },
+  {
+    "id": "D7",
+    "titulo": "Mercado de Trabalho",
+    "medidas": [
+      {
+        "id": "D7.1",
+        "titulo": "Redução de Tributação sobre Prémios de Produtividade e Horas Extraordinárias",
+        "descricao": "Reduzir significativamente a tributação (taxa marginal de IRS) sobre as horas extraordinárias e reduzir ou eliminar a tributação do prémios de produtividade, de modo a aumentar o envolvimento dos trabalhadores nos aumentos da produtividade e flexibilizar a sua participação em determinadas atividades ou projetos empresariais."
+      },
+      {
+        "id": "D7.4",
+        "titulo": "Soluções de Mobilidade para Trabalhadores",
+        "descricao": "Criar um programa de expansão assertiva do transporte público (e.g., em grandes cidades/áreas metropolitanas, bem assim como entre zonas habitacionais e zonas empresariais), por forma a reduzir o tempo e a fadiga das deslocações pendulares, reconhecendo o impacto disso mesmo na produtividade, e promover ativamente complementaridade entre transportes públicos e soluções de mobilidade (incluindo mobilidade suave) implementadas pelas empresas para os seus trabalhadores."
+      }
+    ]
+  },
+  {
+    "id": "D8",
+    "titulo": "Investigação, Desenvolvimento e Inovação (IDI)",
+    "medidas": [
+      {
+        "id": "D8.1",
+        "titulo": "Programas para Apoio a Ganhos de Produtividade de Base Tecnológica",
+        "descricao": "Lançar programas públicos estruturados em formato 'amigável' e indexado a resultados, destinados a promover ganhos de produtividade em PME suportados em transformação digital e IA, bem assim como a transição energética e ESG (Environmental, Social and Governance), com linguagem e formatos adequados às PME."
+      },
+      {
+        "id": "D8.2",
+        "titulo": "Ganhos de Produtividade em PME catalisados por Grandes Empresas",
+        "descricao": "Dinamizar programas de reforço da produtividade de PME através de parcerias firmadas com grandes empresas, potenciadoras da sua qualificação, inovação e integração em cadeias de valor mais alargadas e sofisticadas. Tal pode contemplar plataformas de networking B2B que facilitem o encontro entre startups ou PME e grandes empresas para apresentação de produtos ou serviços, que incentivem grandes empresas a atuar como clientes de startups ou PME promissoras, acelerando tanto processos de experimentação como de crescimento. Complementarmente, promover a prática de clubes de fornecedores (supplier development programs), para qualificar PME locais e as integrar nas cadeias de valor de empresas maiores e de elevada sofisticação."
+      },
+      {
+        "id": "D8.3",
+        "titulo": "Compras Públicas Dinamizadoras da Inovação e Produtividade",
+        "descricao": "Promover e estruturar programas de compra pública que fomentem a inovação e ganhos de produtividade, com a devida adaptação das regras de contratação pública,  que permitam às entidades públicas (e.g., hospitais) atuar como compradores iniciais de soluções desenvolvidas por startups e PME inovadoras."
+      },
+      {
+        "id": "D8.5",
+        "titulo": "Revisão de Carreiras do Ensino Superior",
+        "descricao": "Rever o regime de exclusividade das carreiras do ensino superior, de modo a facilitar/agilizar as participações externas de docentes e investigadores, por forma a fomentar a ligação academia-empresa e a criação de empresas de base científica. Tal pode ser complementado com regimes de licença sabática específicos para docentes interessados em iniciativas de empreendedorismo/transferência tecnológica. Rever o enquadramento da contratação e progressão na carreira académica e dos regimes de avaliação de desempenho dos docentes, de modo a que possam incentivar e reconhecer adequadamente contributos respeitantes a transferência de tecnologia e valorização comercial da investigação (e.g., outputs de investigação de níveis TRL elevados, número e dimensão dos contratos com empresas, receitas geradas com transferência de tecnologia e registo/licenciamento de direitos de propriedade intelectual/industrial) e ao reforço da produtividade nas organizações."
+      },
+      {
+        "id": "D8.8",
+        "titulo": "Utilização de Metodologias Dinamizadoras da Produtividade",
+        "descricao": "Implementar programas intensivos, tanto na administração pública como por parte de entidades privadas, de adoção de metodologias dinamizadoras da produtividade (e.g., abordagens Lean, Seis Sigma, transformação digital, automação, IA) com consultoria especializada e formação prática, visando promover massivamente ações de demonstração setoriais de tecnologias e boas práticas de gestão indutoras de ganhos de produtividade (e.g., ramos automóvel, metalomecânica, agroindustrial), organizados em parceria entre associações empresariais, empresas líderes e instituições de ensino superior, com financiamento indexado a resultados alcançados ao nível de ganhos da produtividade."
+      },
+      {
+        "id": "D8.11",
+        "titulo": "Contribuição de Clusters e Research & Technology Organizations para Ganhos de Produtividade",
+        "descricao": "Criar e operacionalizar um quadro institucional claro e com mecanismo de financiamento coerente para que os Clusters com reconhecimento formal, Laboratórios Colaborativos, Centros Tecnológicos, Centros de Interface e os consórcios das Agendas Mobilizadoras sustentem um ecossistema de inovação aberta, com monitorização e avaliação dos resultados alcançados em termos de ganhos de produtividade sectoriais e/ou territoriais."
+      }
+    ]
+  },
+  {
+    "id": "D9",
+    "titulo": "Reconhecimento da Produtividade",
+    "medidas": [
+      {
+        "id": "D9.1",
+        "titulo": "Sistema de Reconhecimento e Gala Anual da Produtividade",
+        "descricao": "Implementar sistema de identificação e reconhecimento de “Entidades Produtivas” e “Projetos Indutores de Ganhos de Produtividade”, abrangendo tanto a administração pública como organizações privadas, tendo associada também a realização de Gala Anual da Produtividade, patrocinada ao mais alto nível da sociedade portuguesa e mobilizando parceiros relevantes setoriais e agentes territoriais, vocacionada para reconhecer entidades e projetos (públicos e privados) que se tenham distinguido pelos níveis de produtividade alcançados ou gerados."
+      },
+      {
+        "id": "D9.2",
+        "titulo": "Vales da Produtividade",
+        "descricao": "Atribuição de vales de capacitação e ganhos de produtividade a PME que tenham conseguido alcançar incrementos de relevantes de acordo com métricas adequadas de aferição do progresso ao nível da sua produtividade, podendo estes vales ser despendidos junto de entidades vocacionadas para apoiar iniciativas de fomento da produtividade devidamente credenciadas."
+      }
+    ]
+  }
+]
