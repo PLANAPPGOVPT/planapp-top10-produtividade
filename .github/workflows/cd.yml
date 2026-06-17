@@ -69,43 +69,8 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
       - name: Print image tag
-        run: echo "Built image \"${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.tag.outputs.image_tag }}\""
-
-  deploy:
-    needs: [tag, build]
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Checkout monorepo k8s
-        uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          repository: PLANAPPGOVPT/planapp-emcgc-monorepo
-          ref: staging
-          path: monorepo
-
-      - name: Update image tag in deployment
         run: |
-          TAG="${{ needs.tag.outputs.image_tag }}"
-          FILE="monorepo/k8s/apps/produtividade-staging/deployment.yaml"
-          sed -i "s|image: ghcr.io/${{ env.IMAGE_NAME }}:.*|image: ghcr.io/${{ env.IMAGE_NAME }}:${TAG}|" "$FILE"
-          echo "Updated deployment to tag: $TAG"
-          grep "image:" "$FILE"
-
-      - name: Commit and push
-        working-directory: monorepo
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "GitHub Actions"
-          git add k8s/apps/produtividade-staging/deployment.yaml
-          git diff --staged --quiet || git commit -m "chore(k8s): bump ${{ env.APP_NAME }} to ${{ needs.tag.outputs.image_tag }}"
-          git push origin staging
-
-      - name: Trigger Flux reconcile
-        # The monorepo has Flux GitRepository watching staging branch
-        # Changes are picked up automatically within ~60 seconds
-        run: |
-          echo "Waiting for Flux to reconcile..."
-          echo 'Run on k3s: flux reconcile kustomization planapp-staging'
-          echo "Or verify with: curl https://produtividade-medidas.planapp.gov.pt/api/health"
+          echo "Built image \"${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.tag.outputs.image_tag }}\""
+          echo ""
+          echo "Flux Image Automation vai atualizar o deployment automaticamente (~1 min)."
+          echo "Flux ImageUpdateAutomation monitora GHCR e faz commit no monorepo branch staging."
