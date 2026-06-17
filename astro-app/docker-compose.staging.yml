@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  produtividade-staging:
+    image: ghcr.io/planapp-gov-pt/planapp-top10-produtividade:${IMAGE_TAG}
+    container_name: produtividade-staging
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3002:4321"
+    environment:
+      - NODE_ENV=production
+      - PORT=4321
+      - SUPPORT_SCHEMAS_URL=${SUPPORT_SCHEMAS_URL}

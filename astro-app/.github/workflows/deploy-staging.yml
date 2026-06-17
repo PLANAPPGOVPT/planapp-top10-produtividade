@@ -1,0 +1,30 @@
+name: Deploy Staging
+
+on:
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: 'Tag da imagem a promover'
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.STAGING_HOST }}
+          username: ${{ secrets.STAGING_USER }}
+          key: ${{ secrets.STAGING_SSH_KEY }}
+          script: |
+            cd /opt/produtividade-staging
+            echo "IMAGE_TAG=${{ github.event.inputs.image_tag }}" > .env
+            echo "SUPPORT_SCHEMAS_URL=${{ secrets.SUPPORT_SCHEMAS_URL }}" >> .env
+            docker compose -f docker-compose.staging.yml pull
+            docker compose -f docker-compose.staging.yml up -d
+            sudo cp vm/nginx/staging.conf /etc/nginx/sites-available/produtividade-staging.planapp.gov.pt.conf
+            sudo ln -sf /etc/nginx/sites-available/produtividade-staging.planapp.gov.pt.conf /etc/nginx/sites-enabled/
+            sudo nginx -t && sudo systemctl reload nginx
