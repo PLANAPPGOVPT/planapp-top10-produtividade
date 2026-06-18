@@ -72,7 +72,7 @@ export default function VotacaoApp() {
     })
 
     setSubmetido(true)
-  }, [escolhas])
+  }, [escolhas, grupo])
 
   if (carregando) return <div className="p-8 text-center">A carregar...</div>
   if (submetido)
