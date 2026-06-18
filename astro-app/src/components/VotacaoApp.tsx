@@ -8,7 +8,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { X, Check, HelpCircle } from "lucide-react"
+import { X, Check, HelpCircle, ChevronUp, Vote } from "lucide-react"
 
 interface Medida {
   id: string
@@ -28,8 +28,19 @@ export default function VotacaoApp() {
   const [submetido, setSubmetido] = useState(false)
   const [carregando, setCarregando] = useState(true)
   const [modalAberto, setModalAberto] = useState(true)
+  const [grupo, setGrupo] = useState<string | null>(null)
+  const [mobilePanelAberto, setMobilePanelAberto] = useState(false)
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const g = params.get("grupo")
+    if (g) {
+      localStorage.setItem("grupo_voto", g)
+      setGrupo(g)
+    } else {
+      setGrupo(localStorage.getItem("grupo_voto"))
+    }
+
     fetch("/api/dimensoes")
       .then((r) => r.json())
       .then((data) => {
@@ -57,7 +68,7 @@ export default function VotacaoApp() {
     await fetch("/api/votar", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ sessao_id, medidas: escolhas }),
+      body: JSON.stringify({ sessao_id, medidas: escolhas, grupo }),
     })
 
     setSubmetido(true)
@@ -83,8 +94,8 @@ export default function VotacaoApp() {
 
   return (
     <div className="flex h-full gap-4">
-      {/* Painel lateral — escolhas (fixed, não rola) */}
-      <aside className="bg-muted flex h-full w-80 shrink-0 flex-col overflow-hidden rounded-xl border">
+      {/* Painel lateral — escolhas (desktop only) */}
+      <aside className="hidden lg:flex bg-muted h-full w-80 shrink-0 flex-col overflow-hidden rounded-xl border">
         <div className="border-b bg-white p-4 shrink-0">
           <h2 className="font-semibold">As suas 10 escolhas</h2>
           <div className="mt-1 flex items-center gap-2">
@@ -150,29 +161,29 @@ export default function VotacaoApp() {
       </aside>
 
       {/* Área central — dimensões */}
-      <main className="flex-1 overflow-hidden rounded-xl border bg-white">
-        <div className="border-b bg-gray-50 px-4 py-3 flex items-center justify-between">
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <img src="/logo_navbar.png" alt="Planapp" className="h-6 w-auto" />
-                <h1 className="text-lg font-semibold">
-                  Escolha as 10 Medidas para a Produtividade
-                </h1>
-              </div>
-              <p className="text-muted-foreground text-sm">
-                Clique nas dimensões para explorar as medidas propostas.
-              </p>
+      <main className="flex-1 min-w-0 overflow-hidden rounded-xl border bg-white">
+        <div className="border-b bg-gray-50 px-4 py-3 flex flex-wrap items-start justify-between gap-2 sm:flex-nowrap sm:items-center">
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-2 min-w-0">
+              <img src="/logo_navbar.png" alt="Planapp" className="h-6 w-auto shrink-0" />
+              <h1 className="text-base sm:text-lg font-semibold">
+                Escolha as 10 Medidas
+              </h1>
             </div>
-            <Button
-              variant="outline"
-              size="sm"
-              className="gap-1.5 shrink-0"
-              onClick={() => setModalAberto(true)}
-            >
-              <HelpCircle className="size-4" />
-              Como funciona
-            </Button>
+            <p className="text-muted-foreground text-sm mt-0.5">
+              Clique nas dimensões para explorar as medidas propostas.
+            </p>
           </div>
+          <Button
+            variant="outline"
+            size="sm"
+            className="gap-1.5 shrink-0"
+            onClick={() => setModalAberto(true)}
+          >
+            <HelpCircle className="size-4" />
+            <span className="hidden sm:inline">Como funciona</span>
+          </Button>
+        </div>
         <ScrollArea className="h-[calc(100%-4.5rem)] px-4 py-4">
           <Accordion type="multiple" className="space-y-2">
             {dimensoes.map((d) => {
@@ -250,6 +261,130 @@ export default function VotacaoApp() {
         </ScrollArea>
       </main>
 
+      {/* Botão flutuante mobile */}
+      {escolhas.length === 10 ? (
+        <div className="lg:hidden fixed bottom-4 left-1/2 z-30 -translate-x-1/2 flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setMobilePanelAberto(true)}
+            className="flex items-center gap-1.5 rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 shadow-lg border transition-transform active:scale-95"
+          >
+            Rever
+            <span className="ml-0.5 inline-flex items-center justify-center rounded-full bg-gray-200 px-1.5 py-0.5 text-xs">
+              10
+            </span>
+          </button>
+          <button
+            type="button"
+            onClick={submit}
+            className="flex items-center gap-1.5 rounded-full bg-green-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg transition-transform active:scale-95"
+          >
+            <Check className="size-4" />
+            Submeter votação
+          </button>
+        </div>
+      ) : (
+        <button
+          type="button"
+          onClick={() => setMobilePanelAberto(true)}
+          className="lg:hidden fixed bottom-4 left-1/2 z-30 -translate-x-1/2 flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-white shadow-lg transition-transform active:scale-95"
+          aria-label="Abrir escolhas"
+        >
+          <Vote className="size-4" />
+          As suas escolhas
+          <span className="ml-1 inline-flex items-center justify-center rounded-full bg-white/20 px-2 py-0.5 text-xs">
+            {escolhas.length}/10
+          </span>
+        </button>
+      )}
+
+      {/* Bottom sheet mobile com as escolhas */}
+      {mobilePanelAberto && (
+        <div
+          className="lg:hidden fixed inset-0 z-40 bg-black/50"
+          onClick={() => setMobilePanelAberto(false)}
+        >
+          <div
+            className="absolute bottom-0 left-0 right-0 max-h-[80vh] rounded-t-2xl border bg-white shadow-2xl flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between border-b px-4 py-3">
+              <h2 className="font-semibold">As suas 10 escolhas</h2>
+              <div className="flex items-center gap-2">
+                <span className="text-muted-foreground text-xs font-medium">
+                  {escolhas.length}/10
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setMobilePanelAberto(false)}
+                  className="rounded-full bg-gray-100 p-1.5 transition-colors hover:bg-gray-200"
+                  aria-label="Fechar"
+                >
+                  <ChevronUp className="size-4 text-gray-600" />
+                </button>
+              </div>
+            </div>
+            <div className="h-2 bg-gray-100">
+              <div
+                className="h-full bg-green-500 transition-all duration-300"
+                style={{ width: `${escolhas.length * 10}%` }}
+              />
+            </div>
+            <ScrollArea className="flex-1 overflow-y-auto px-3 py-3">
+              {escolhas.length === 0 && (
+                <p className="text-muted-foreground p-4 text-center text-sm leading-relaxed">
+                  Explore as dimensões e escolha 10 medidas que considera mais importantes para Portugal.
+                </p>
+              )}
+              {escolhas.map((id, i) => {
+                const m = todasMedidas.find((x) => x.id === id)!
+                return (
+                  <div
+                    key={id}
+                    className="group mb-2 flex items-start gap-2 rounded-lg border bg-white p-3 shadow-sm"
+                  >
+                    <span className="text-muted-foreground mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-gray-100 text-xs font-bold">
+                      {i + 1}
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-muted-foreground text-xs leading-tight">
+                        {m.dimensao_titulo}
+                      </p>
+                      <p className="mt-0.5 text-sm leading-snug font-medium">
+                        {m.titulo}
+                      </p>
+                    </div>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="size-6 opacity-60 group-hover:opacity-100 transition-opacity"
+                      onClick={() => toggleMedida(id)}
+                      aria-label={`Remover ${m.titulo}`}
+                    >
+                      <X className="size-3" />
+                    </Button>
+                  </div>
+                )
+              })}
+            </ScrollArea>
+            <div className="border-t bg-white p-3 shrink-0">
+              <Button
+                className="w-full"
+                disabled={escolhas.length !== 10}
+                onClick={() => {
+                  setMobilePanelAberto(false)
+                  submit()
+                }}
+              >
+                {escolhas.length < 10
+                  ? `Faltam ${10 - escolhas.length}`
+                  : "Submeter votação"}
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
         {/* Modal "Como funciona" */}
         {modalAberto && (
           <div
@@ -276,7 +411,7 @@ export default function VotacaoApp() {
               </div>
 
               <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                Estão em consulta <strong className="text-foreground">32 medidas</strong> de
+                No contexto do Projeto <strong className="text-foreground">"Analisar e melhorar a produtividade em Portugal: um plano holístico de intervenção"</strong>, estão em consulta <strong className="text-foreground">32 medidas</strong> de
                 política pública para aumentar a produtividade em Portugal,
                 distribuídas por <strong className="text-foreground">9 dimensões</strong> de
                 intervenção. O seu papel é escolher as{" "}
@@ -307,7 +442,7 @@ export default function VotacaoApp() {
                   <div>
                     <p className="font-medium text-foreground">Selecione as medidas</p>
                     <p className="text-muted-foreground text-xs mt-0.5">
-                      Toque/clique num cartão de medida para a selecionar. A medida aparece automaticamente no painel lateral esquerdo. Toque novamente para remover.
+                      Toque/clique num cartão de medida para a selecionar. A medida aparece automaticamente no painel de escolhas. Toque novamente para remover.
                     </p>
                   </div>
                 </div>
@@ -317,7 +452,7 @@ export default function VotacaoApp() {
                   <div>
                     <p className="font-medium text-foreground">Submeta a votação</p>
                     <p className="text-muted-foreground text-xs mt-0.5">
-                      Quando tiver as 10 escolhas, o botão <strong>Submeter votação</strong> fica ativo no fundo do painel lateral. Reveja as suas escolhas e submeta.
+                      Quando tiver as 10 escolhas, o botão <strong>Submeter votação</strong> fica ativo no painel de escolhas. Reveja as suas escolhas e submeta.
                     </p>
                   </div>
                 </div>
