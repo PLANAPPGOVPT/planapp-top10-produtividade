@@ -24,7 +24,7 @@ export default function EscolhasPanel({ escolhas, onRemove }: Props) {
           {escolhas.length} de 10
         </p>
       </div>
-      <ScrollArea className="flex-1">
+      <ScrollArea className="flex-1 min-h-0">
         <div className="p-2">
           {escolhas.length === 0 && (
             <div className="text-muted-foreground p-4 text-center text-sm">

@@ -62,4 +62,4 @@ jobs:
           echo "Built image \"${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.version.outputs.image_tag }}\""
           echo ""
           echo "Flux Image Automation vai atualizar o deployment automaticamente (~1 min)."
-          echo "Flux ImageUpdateAutomation monitora GHCR e faz commit no monorepo branch staging."
+          echo "Flux ImageUpdateAutomation monitora GHCR e faz commit no monorepo branch master."

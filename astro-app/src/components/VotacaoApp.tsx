@@ -34,7 +34,12 @@ export default function VotacaoApp() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
     const g = params.get("grupo")
+    const previousGrupo = localStorage.getItem("grupo_voto")
+
     if (g) {
+      if (previousGrupo !== g) {
+        localStorage.removeItem("sessao_voto")
+      }
       localStorage.setItem("grupo_voto", g)
       setGrupo(g)
     } else {
@@ -61,9 +66,12 @@ export default function VotacaoApp() {
   )
 
   const submit = useCallback(async () => {
-    const sessao_id =
-      localStorage.getItem("sessao_voto") || crypto.randomUUID()
+    const currentGrupo = grupo ?? "__sem-grupo__"
+    const sessionKey = `sessao_voto:${currentGrupo}`
+    const sessao_id = localStorage.getItem(sessionKey) || crypto.randomUUID()
+
     localStorage.setItem("sessao_voto", sessao_id)
+    localStorage.setItem(sessionKey, sessao_id)
 
     await fetch("/api/votar", {
       method: "POST",
@@ -110,7 +118,7 @@ export default function VotacaoApp() {
             </span>
           </div>
         </div>
-        <ScrollArea className="flex-1 px-2 py-2">
+        <ScrollArea className="flex-1 min-h-0 px-2 py-2">
           {escolhas.length === 0 && (
             <p className="text-muted-foreground p-4 text-center text-sm leading-relaxed">
               Explore as dimensões ao lado e Escolha 10 medidas que considera mais importantes para Portugal.
@@ -220,10 +228,10 @@ export default function VotacaoApp() {
                           key={m.id}
                           role="button"
                           tabIndex={0}
-                          className={`cursor-pointer rounded-lg border bg-white p-4 shadow-sm transition-all ${
+                          className={`cursor-pointer rounded-lg border bg-white p-4 shadow-sm transition-colors ${
                             selecionada
-                              ? "border-green-300 ring-1 ring-green-200"
-                              : "hover:shadow-md"
+                                                        ? "border-green-300 ring-1 ring-inset ring-green-200"
+                                                        : "border-gray-200 ring-1 ring-inset ring-transparent hover:shadow-md"
                           } ${
                             !selecionada && escolhas.length >= 10
                               ? "pointer-events-none opacity-50"
@@ -246,9 +254,9 @@ export default function VotacaoApp() {
                                 {m.descricao}
                               </p>
                             </div>
-                            {selecionada && (
-                              <Check className="size-5 shrink-0 text-green-600" />
-                            )}
+                            <Check
+                              className={`size-5 shrink-0 text-green-600 transition-opacity ${selecionada ? "opacity-100" : "opacity-0"}`}
+                            />
                           </div>
                         </div>
                       )
@@ -461,6 +469,12 @@ export default function VotacaoApp() {
               <div className="mt-5 rounded-lg bg-green-50 border border-green-200 p-3 text-sm">
                 <p className="text-green-800">
                   <strong>💡 Dica:</strong> Pode remover e trocar medidas à vontade antes de submeter. A ordem das medidas não influencia o resultado — só conta a votação final com as 10 escolhidas.
+                </p>
+              </div>
+
+              <div className="mt-4 rounded-lg bg-amber-50 border border-amber-200 p-3 text-sm">
+                <p className="text-amber-800">
+                  <strong>📅 Prazo:</strong> A votação estará aberta até <strong>25 de junho de 2026</strong>.
                 </p>
               </div>
 
