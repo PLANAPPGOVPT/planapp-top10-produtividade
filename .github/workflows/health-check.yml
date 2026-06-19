@@ -1,0 +1,60 @@
+name: Health Check (App + DB)
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'   # a cada 10 minutos
+  workflow_dispatch:          # permite correr manualmente
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check DB connectivity
+        run: |
+          echo "🔍 A verificar ligação à base de dados..."
+          HTTP_CODE=$(curl -s -o /tmp/health.json -w '%{http_code}' "${{ secrets.APP_BASE_URL }}/api/health/db")
+          BODY=$(cat /tmp/health.json)
+          echo "HTTP status: $HTTP_CODE"
+          echo "Response: $BODY"
+
+          if [ "$HTTP_CODE" != "200" ]; then
+            echo "❌ DB health check falhou (HTTP $HTTP_CODE)"
+            echo "$BODY"
+            exit 1
+          fi
+
+          DB_STATUS=$(echo "$BODY" | jq -r '.db // "unknown"')
+          if [ "$DB_STATUS" != "connected" ]; then
+            echo "❌ Base de dados não está conectada"
+            echo "$BODY"
+            exit 1
+          fi
+
+          echo "✅ DB está conectada!"
+
+      - name: Check public pages
+        run: |
+          echo "🌐 A verificar páginas públicas..."
+          URLS=(
+            "${{ secrets.APP_BASE_URL }}/?grupo=conselho-consultivo"
+            "${{ secrets.APP_BASE_URL }}/?grupo=grupo-acompanhamento"
+            "${{ secrets.APP_BASE_URL }}/?grupo=grupo-aconselhamento-governativo"
+          )
+          FAILED=0
+
+          for URL in "${URLS[@]}"; do
+            HTTP_CODE=$(curl -s -o /dev/null -w '%{http_code}' "$URL")
+            if [ "$HTTP_CODE" == "200" ]; then
+              echo "  ✅ $URL ($HTTP_CODE)"
+            else
+              echo "  ❌ $URL (HTTP $HTTP_CODE)"
+              FAILED=1
+            fi
+          done
+
+          if [ "$FAILED" != "0" ]; then
+            echo "❌ Uma ou mais páginas não estão a responder"
+            exit 1
+          fi
+
+          echo "✅ Todas as páginas estão a responder!"
