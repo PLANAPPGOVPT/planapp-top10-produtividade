@@ -1,8 +1,8 @@
 name: Health Check (App + DB)
 
 on:
-  schedule:
-    - cron: '*/10 * * * *'   # a cada 10 minutos
+  #schedule:
+    #- cron: '*/10 * * * *'   # a cada 10 minutos
   workflow_dispatch:          # permite correr manualmente
 
 jobs:
